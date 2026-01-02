@@ -1,0 +1,67 @@
+Full Name: Michelo M Justus
+Alias / Social Handle: Case / amcodecase
+Location: Zambia
+Tagline: Rome wasn’t built in a day because they didn’t involve me.
+
+About Me
+
+I am a software engineer, systems developer, and ICT educator with deep experience in building reliable, scalable, and maintainable digital systems. I focus on end-to-end solutions — from software design and implementation to deployment, monitoring, and long-term system reliability. I combine hands-on technical expertise with tutoring and mentoring, guiding both undergraduate and postgraduate students in computer science and ICT-related disciplines. My work is practical, outcome-driven, and anchored in real-world problem-solving.
+
+Core Technical Skills
+
+Backend & Web Development: Laravel (PHP), Django (Python), REST APIs, database-driven applications.
+Frontend & Full-Stack: Next.js, modern JS frameworks, SPA design, responsive interfaces.
+Databases: MySQL, data modeling, migrations, performance optimization.
+DevOps & Infrastructure: Docker, CI/CD pipelines, server setup, deployment automation, backups, logging, system monitoring, uptime reliability.
+Monitoring & Operations: Application and system monitoring, diagnostics, troubleshooting, operational support.
+
+Teaching & Academic Involvement
+
+I am actively involved in teaching and tutoring computer science and ICT courses at both undergraduate and postgraduate levels. I focus on practical learning, project-based exercises, and bridging theory with applied system development, mentoring students in software engineering, DevOps practices, and technical problem-solving.
+
+Education
+
+Bachelor’s Degree in ICT with Education — Chalimbana University
+This degree combines technical computing knowledge with pedagogy, enabling me to build systems and effectively teach, mentor, and guide others in technology.
+
+Leadership & Recognition
+
+President, Chalimbana University ICTAZ Student Chapter — led student initiatives, organized mentorship programs, and represented ICT student interests.
+
+ICTAZ Outstanding Male ICT Student (2024) — recognition for leadership, contribution, and excellence in ICT.
+
+Professional Experience (Work History Logs)
+
+Display these as timeline/logs in the SPA:
+
+Innovative Dynamics Limited — Software Engineer / Developer
+
+Zambia Qualifications Authority — Systems Developer / ICT Specialist
+
+Public Service Pensions Fund — Developer & DevOps Contributor
+
+Each entry can include role highlights, achievements, or contributions for technical and business mode views.
+
+How I Work
+
+I approach technology from a systems perspective, balancing development, deployment, and long-term maintainability. I value clarity, accountability, and real-world impact, whether collaborating with organizations or mentoring students. My focus is always on delivering systems that work reliably and solve the intended problem.
+
+Online Presence
+
+LinkedIn: https://www.linkedin.com/in/amcodecase
+
+Profile Image
+
+Place a personal profile image at /images/profile.jpg in the hero or about section. Use GSAP animations to reveal the image dynamically for better engagement.
+
+Notes for the SPA Agent
+
+Treat this as my personal profile, not a company website.
+
+Animate logs for work experience and projects with GSAP (fade-in, slide-in, or typing effect).
+
+Business mode emphasizes impact, outcomes, and trust.
+
+Technical mode emphasizes stack, DevOps workflow, architecture, and teaching depth.
+
+The SPA must clearly reflect Michelo M Justus / Case / amcodecase as the individual responsible.
