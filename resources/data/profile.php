@@ -51,10 +51,6 @@ return [
             'logo' => '/images/logos/chau.png',
         ],
         [
-            'name' => 'Public Service Pensions Fund',
-            'logo' => '/images/logos/pspflogo.png',
-        ],
-        [
             'name' => 'Uspire Services',
             'logo' => '/images/logos/us.png',
         ],
@@ -95,24 +91,6 @@ return [
                 'Implemented system monitoring and logging solutions',
                 'Performed database migrations and data modeling',
                 'Managed server infrastructure and deployment processes',
-            ],
-        ],
-        [
-            'role' => 'Developer & DevOps Contributor',
-            'organization' => 'Public Service Pensions Fund',
-            'logo' => '/images/logos/pspf.png',
-            'period' => '2021 - 2022',
-            'location' => 'Zambia',
-            'responsibilities_business' => [
-                'Contributed to pension management system development',
-                'Improved system reliability and reduced downtime',
-                'Supported digital transformation initiatives',
-            ],
-            'responsibilities_technical' => [
-                'Developed backend services and APIs using Python/Django',
-                'Implemented automated backup and recovery procedures',
-                'Set up monitoring dashboards for system health tracking',
-                'Collaborated on DevOps practices and deployment automation',
             ],
         ],
     ],

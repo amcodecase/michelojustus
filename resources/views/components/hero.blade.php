@@ -46,22 +46,50 @@
                     <div class="gallery-image">
                         <img src="/images/gallery/img1.jpg" alt="{{ $data['name'] }}" 
                              data-title="...will always come to light" 
+                             loading="lazy"
                              onclick="openImageModal('/images/gallery/img1.jpg', this.dataset.title)">
                     </div>
                     <div class="gallery-image">
                         <img src="/images/gallery/img3.jpg" alt="{{ $data['name'] }}" 
                              data-title="Me as a System Developer" 
+                             loading="lazy"
                              onclick="openImageModal('/images/gallery/img3.jpg', this.dataset.title)">
                     </div>
                     <div class="gallery-image">
                         <img src="/images/gallery/img4.jpg" alt="{{ $data['name'] }}" 
-                             data-title="Playing chess at ZUFIAW 2025" 
+                             data-title="ZUFIAW 2025" 
+                             loading="lazy"
                              onclick="openImageModal('/images/gallery/img4.jpg', this.dataset.title)">
                     </div>
                     <div class="gallery-image">
                         <img src="/images/gallery/img5.jpg" alt="{{ $data['name'] }}" 
-                             data-title="During my internship" 
+                             data-title="ZAQA" 
+                             loading="lazy"
                              onclick="openImageModal('/images/gallery/img5.jpg', this.dataset.title)">
+                    </div>
+                    <div class="gallery-image">
+                        <img src="/images/gallery/img6.jpg" alt="{{ $data['name'] }}" 
+                             data-title="2023 Cyber Security Workshop" 
+                             loading="lazy"
+                             onclick="openImageModal('/images/gallery/img6.jpg', this.dataset.title)">
+                    </div>
+                    <div class="gallery-image">
+                        <img src="/images/gallery/img7.jpg" alt="{{ $data['name'] }}" 
+                             data-title="2022 Infratel Educational Tour" 
+                             loading="lazy"
+                             onclick="openImageModal('/images/gallery/img7.jpg', this.dataset.title)">
+                    </div>
+                    <div class="gallery-image">
+                        <img src="/images/gallery/img8.jpg" alt="{{ $data['name'] }}" 
+                             data-title="2022 Web Development Serminar" 
+                             loading="lazy"
+                             onclick="openImageModal('/images/gallery/img8.jpg', this.dataset.title)">
+                    </div>
+                    <div class="gallery-image">
+                        <img src="/images/gallery/img9.jpg" alt="{{ $data['name'] }}" 
+                             data-title="2023 ICTAZ AGM" 
+                             loading="lazy"
+                             onclick="openImageModal('/images/gallery/img9.jpg', this.dataset.title)">
                     </div>
                 </div>
                 <div class="profile-glow"></div>
