@@ -82,6 +82,12 @@ header.scrolled .logo {
     opacity: 1;
 }
 
+@media (max-width: 768px) {
+    header.scrolled .logo {
+        display: none;
+    }
+}
+
 nav {
     max-width: 1200px;
     margin: 0 auto;
@@ -93,11 +99,24 @@ nav {
     z-index: 1;
 }
 
+@media (max-width: 768px) {
+    nav {
+        justify-content: center;
+    }
+}
+
 .logo {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .logo {
+        display: none;
+    }
 }
 
 /* Mode Toggle */
@@ -213,6 +232,8 @@ section:nth-child(even) {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 
