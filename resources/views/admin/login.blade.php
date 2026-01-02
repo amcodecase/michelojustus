@@ -14,8 +14,8 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -27,63 +27,83 @@
         body::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-            top: -250px;
-            right: -250px;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(26, 26, 46, 0.015) 40px, rgba(26, 26, 46, 0.015) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(26, 26, 46, 0.015) 40px, rgba(26, 26, 46, 0.015) 41px),
+                repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(26, 26, 46, 0.008) 80px, rgba(26, 26, 46, 0.008) 81px);
+            opacity: 1;
+            z-index: 0;
+            pointer-events: none;
         }
         body::after {
             content: '';
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
-            bottom: -200px;
-            left: -200px;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(30deg, rgba(26, 26, 46, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(26, 26, 46, 0.02) 87.5%, rgba(26, 26, 46, 0.02)),
+                linear-gradient(150deg, rgba(26, 26, 46, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(26, 26, 46, 0.02) 87.5%, rgba(26, 26, 46, 0.02)),
+                linear-gradient(30deg, rgba(26, 26, 46, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(26, 26, 46, 0.02) 87.5%, rgba(26, 26, 46, 0.02)),
+                linear-gradient(150deg, rgba(26, 26, 46, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(26, 26, 46, 0.02) 87.5%, rgba(26, 26, 46, 0.02));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+            z-index: 0;
+            pointer-events: none;
         }
         .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
             padding: 3rem 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            border-radius: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             max-width: 420px;
             width: 100%;
+            border: 1px solid #e5e7eb;
             position: relative;
             z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .login-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 24px rgba(26, 26, 46, 0.3);
-        }
-        .login-icon i {
-            font-size: 2rem;
-            color: white;
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a1a2e, #16213e, #1a1a2e);
         }
         .login-header {
             text-align: center;
             margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: relative;
+        }
+        .login-header::before {
+            content: '\f3ed';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 2.5rem;
+            color: #1a1a2e;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.9;
         }
         .login-header h1 {
             color: #1a1a2e;
             margin-bottom: 0.5rem;
-            font-size: 1.875rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
         .login-header p {
             color: #6b7280;
-            font-size: 0.95rem;
+            font-size: 0.875rem;
+            font-weight: 400;
         }
         .login-form {
             display: flex;
@@ -95,10 +115,17 @@
             flex-direction: column;
         }
         .form-group label {
-            margin-bottom: 0.625rem;
+            margin-bottom: 0.5rem;
             color: #374151;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .form-group label i {
+            color: #6b7280;
+            font-size: 0.875rem;
         }
         .input-wrapper {
             position: relative;
@@ -109,96 +136,97 @@
             top: 50%;
             transform: translateY(-50%);
             color: #9ca3af;
-            font-size: 1.125rem;
+            font-size: 0.875rem;
         }
         .form-group input {
-            padding: 0.875rem 1rem 0.875rem 3rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
             background: white;
+            width: 100%;
         }
         .form-group input:focus {
             outline: none;
             border-color: #1a1a2e;
-            box-shadow: 0 0 0 4px rgba(26, 26, 46, 0.08);
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.05);
         }
         .login-btn {
-            padding: 1rem;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 0.875rem;
+            background: #1a1a2e;
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1.0625rem;
-            font-weight: 600;
+            border-radius: 0;
+            font-size: 0.9375rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             margin-top: 0.5rem;
-            box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26, 26, 46, 0.4);
+            background: #16213e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(26, 26, 46, 0.2);
         }
         .login-btn:active {
             transform: translateY(0);
         }
         .error-message {
-            background: #fee2e2;
+            background: #fef2f2;
             color: #991b1b;
-            padding: 0.875rem 1rem;
-            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            border-radius: 0;
             border: 1px solid #fecaca;
             display: none;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             text-align: center;
         }
         @media (max-width: 480px) {
             .login-container {
-                padding: 2.5rem 1.5rem;
-            }
-            .login-header h1 {
-                font-size: 1.625rem;
+                padding: 2rem 1.5rem;
+                border: none;
             }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <div class="login-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        
         <div class="login-header">
-            <h1>Admin Portal</h1>
-            <p>Testimonials Management System</p>
+            <h1>Admin Login</h1>
+            <p>Testimonials Management</p>
         </div>
 
         @if ($errors->any())
             <div class="error-message" style="display: block;">
-                <i class="fa-solid fa-circle-exclamation"></i> {{ $errors->first() }}
+                {{ $errors->first() }}
             </div>
         @endif
 
         <form method="POST" action="/admin/login" class="login-form">
             @csrf
             <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
                 <div class="input-wrapper">
-                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <i class="fa-solid fa-at input-icon"></i>
                     <input type="email" id="email" name="email" placeholder="admin@michelojustus.com" required autofocus>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
                 <div class="input-wrapper">
-                    <i class="fa-solid fa-lock input-icon"></i>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    <i class="fa-solid fa-key input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
                 </div>
             </div>
             <button type="submit" class="login-btn">
-                <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign In
             </button>
         </form>
     </div>

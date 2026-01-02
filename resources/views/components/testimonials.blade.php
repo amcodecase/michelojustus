@@ -17,8 +17,16 @@
             </div>
         </div>
 
-        <div class="testimonials-grid" id="testimonialsGrid">
-            <!-- Testimonials will be loaded here -->
+        <div class="testimonials-slider-wrapper">
+            <button class="testimonials-nav testimonials-nav-prev" id="testimonialsNavPrev">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonials will be loaded here -->
+            </div>
+            <button class="testimonials-nav testimonials-nav-next" id="testimonialsNavNext">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
 
         <button class="btn btn-primary open-modal-btn" id="openReviewModal">
@@ -320,5 +328,50 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
     }
-});
+
+    // Testimonials navigation arrows
+    const testimonialsGrid = document.getElementById('testimonialsGrid');
+    const prevBtn = document.getElementById('testimonialsNavPrev');
+    const nextBtn = document.getElementById('testimonialsNavNext');
+
+    if (prevBtn && nextBtn && testimonialsGrid) {
+        prevBtn.addEventListener('click', () => {
+            testimonialsGrid.scrollBy({
+                left: -370,
+                behavior: 'smooth'
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            testimonialsGrid.scrollBy({
+                left: 370,
+                behavior: 'smooth'
+            });
+        });
+
+        // Update button visibility based on scroll position
+        function updateNavButtons() {
+            const scrollLeft = testimonialsGrid.scrollLeft;
+            const maxScroll = testimonialsGrid.scrollWidth - testimonialsGrid.clientWidth;
+
+            if (scrollLeft <= 0) {
+                prevBtn.style.opacity = '0.3';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (scrollLeft >= maxScroll - 5) {
+                nextBtn.style.opacity = '0.3';
+                nextBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
+        }
+
+        testimonialsGrid.addEventListener('scroll', updateNavButtons);
+        updateNavButtons();
+    }});
 </script>

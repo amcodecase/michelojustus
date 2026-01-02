@@ -3,6 +3,7 @@
   "short_name": "Michelo Justus",
   "description": "Software Engineer, Systems Developer & ICT Educator specializing in Laravel, Django, Next.js, and DevOps",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1a1a2e",
@@ -21,19 +22,5 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["portfolio", "technology", "education"],
-  "screenshots": [
-    {
-      "src": "/images/screenshot-mobile.png",
-      "sizes": "540x720",
-      "type": "image/png",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "/images/screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
-  ]
+  "categories": ["portfolio", "technology", "education"]
 }

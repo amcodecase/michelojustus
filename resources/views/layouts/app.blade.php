@@ -91,8 +91,8 @@
                         <a href="https://wa.me/260770822430" target="_blank" rel="noopener noreferrer" title="WhatsApp">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
-                        <a href="#" title="Location: Zambia">
-                            <i class="fa-solid fa-location-dot"></i>
+                        <a href="https://facebook.com/amcodecase" target="_blank" rel="noopener noreferrer" title="Facebook">
+                            <i class="fa-brands fa-facebook"></i>
                         </a>
                     </div>
                 </div>
@@ -165,14 +165,24 @@
         const installBanner = document.createElement('div');
         installBanner.className = 'pwa-install-banner';
         installBanner.innerHTML = `
-            <div class="pwa-banner-content">
-                <div class="pwa-banner-text">
-                    <i class="fa-solid fa-download"></i>
-                    <span>Install this app for a better experience!</span>
-                </div>
-                <div class="pwa-banner-actions">
-                    <button class="pwa-install-btn" id="installBtn">Install</button>
-                    <button class="pwa-close-btn" id="closeBtn">&times;</button>
+            <div class="pwa-banner-wrapper">
+                <div class="pwa-banner-content">
+                    <div class="pwa-banner-icon">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="pwa-banner-text">
+                        <h4>Install App</h4>
+                        <p>Get quick access and works offline!</p>
+                    </div>
+                    <div class="pwa-banner-actions">
+                        <button class="pwa-install-btn" id="installBtn">
+                            <i class="fa-solid fa-download"></i>
+                            Install
+                        </button>
+                        <button class="pwa-close-btn" id="closeBtn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
