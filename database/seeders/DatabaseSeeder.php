@@ -23,9 +23,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'michelojustus@gmail.com',
             'password' => Hash::make('@WhiteDiamond0100'),
         ]);
-
-        foreach ($testimonials as $testimonial) {
-            Testimonial::create($testimonial);
-        }
     }
 }
