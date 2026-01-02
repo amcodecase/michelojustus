@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Debug - Michelo Justus</title>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0ef;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #0ef;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: 600;
+            color: #ccc;
+        }
+        .value {
+            color: #0ef;
+            text-align: right;
+            max-width: 60%;
+            word-break: break-all;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status.success {
+            background: rgba(0, 255, 0, 0.2);
+            color: #0f0;
+        }
+        .status.error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #f00;
+        }
+        .status.warning {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+        .log {
+            background: #000;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-left: 3px solid #0ef;
+            padding-left: 10px;
+        }
+        .log-error {
+            border-left-color: #f00;
+            color: #f00;
+        }
+        .log-success {
+            border-left-color: #0f0;
+            color: #0f0;
+        }
+        button {
+            background: linear-gradient(45deg, #0ef, #09f);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 PWA Debug Info</h1>
+        
+        <div class="section">
+            <h2>Browser Information</h2>
+            <div id="browserInfo"></div>
+        </div>
+
+        <div class="section">
+            <h2>PWA Status</h2>
+            <div id="pwaStatus"></div>
+        </div>
+
+        <div class="section">
+            <h2>Service Worker</h2>
+            <div id="swStatus"></div>
+        </div>
+
+        <div class="section">
+            <h2>Manifest</h2>
+            <div id="manifestStatus"></div>
+        </div>
+
+        <div class="section">
+            <h2>localStorage</h2>
+            <div id="localStorageStatus"></div>
+            <button onclick="clearPWAData()">Clear PWA localStorage</button>
+        </div>
+
+        <div class="section">
+            <h2>Event Log</h2>
+            <div class="log" id="eventLog"></div>
+        </div>
+    </div>
+
+    <script>
+        const logEl = document.getElementById('eventLog');
+        
+        function addLog(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function getStatus(condition) {
+            return condition ? 
+                '<span class="status success">✓ Yes</span>' : 
+                '<span class="status error">✗ No</span>';
+        }
+
+        function displayInfo() {
+            // Browser Info
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isAndroid = /Android/.test(navigator.userAgent);
+            const isChrome = /Chrome/.test(navigator.userAgent);
+            const isSafari = /Safari/.test(navigator.userAgent) && !isChrome;
+            
+            document.getElementById('browserInfo').innerHTML = `
+                <div class="info-row">
+                    <span class="label">Platform:</span>
+                    <span class="value">${navigator.platform}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">iOS Device:</span>
+                    <span class="value">${getStatus(isIOS)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Android Device:</span>
+                    <span class="value">${getStatus(isAndroid)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Browser:</span>
+                    <span class="value">${isChrome ? 'Chrome' : isSafari ? 'Safari' : 'Other'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">User Agent:</span>
+                    <span class="value">${navigator.userAgent}</span>
+                </div>
+            `;
+
+            // PWA Status
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                               window.navigator.standalone === true;
+            const isHTTPS = location.protocol === 'https:' || location.hostname === 'localhost';
+            
+            document.getElementById('pwaStatus').innerHTML = `
+                <div class="info-row">
+                    <span class="label">Installed:</span>
+                    <span class="value">${getStatus(isStandalone)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">HTTPS:</span>
+                    <span class="value">${getStatus(isHTTPS)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Protocol:</span>
+                    <span class="value">${location.protocol}</span>
+                </div>
+            `;
+
+            addLog('Browser info loaded');
+
+            // Service Worker Status
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(reg => {
+                    const hasReg = !!reg;
+                    document.getElementById('swStatus').innerHTML = `
+                        <div class="info-row">
+                            <span class="label">Supported:</span>
+                            <span class="value">${getStatus(true)}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Registered:</span>
+                            <span class="value">${getStatus(hasReg)}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">State:</span>
+                            <span class="value">${reg ? reg.active?.state || 'Installing' : 'None'}</span>
+                        </div>
+                    `;
+                    
+                    if (hasReg) {
+                        addLog('Service Worker is registered', 'success');
+                    } else {
+                        addLog('Service Worker not registered', 'error');
+                    }
+                });
+
+                // Try to register SW
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        addLog('Service Worker registered successfully', 'success');
+                    })
+                    .catch(err => {
+                        addLog(`Service Worker registration failed: ${err.message}`, 'error');
+                    });
+            } else {
+                document.getElementById('swStatus').innerHTML = `
+                    <div class="info-row">
+                        <span class="label">Supported:</span>
+                        <span class="value">${getStatus(false)}</span>
+                    </div>
+                `;
+                addLog('Service Worker not supported in this browser', 'error');
+            }
+
+            // Manifest Status
+            fetch('/manifest.json')
+                .then(res => res.json())
+                .then(manifest => {
+                    document.getElementById('manifestStatus').innerHTML = `
+                        <div class="info-row">
+                            <span class="label">Accessible:</span>
+                            <span class="value">${getStatus(true)}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Name:</span>
+                            <span class="value">${manifest.name}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Icons:</span>
+                            <span class="value">${manifest.icons?.length || 0} found</span>
+                        </div>
+                    `;
+                    addLog('Manifest loaded successfully', 'success');
+                })
+                .catch(err => {
+                    document.getElementById('manifestStatus').innerHTML = `
+                        <div class="info-row">
+                            <span class="label">Accessible:</span>
+                            <span class="value">${getStatus(false)}</span>
+                        </div>
+                    `;
+                    addLog(`Manifest load failed: ${err.message}`, 'error');
+                });
+
+            // localStorage Status
+            const pwaKeys = Object.keys(localStorage).filter(k => k.startsWith('pwa-'));
+            let lsHTML = '';
+            if (pwaKeys.length === 0) {
+                lsHTML = '<div class="info-row"><span class="label">No PWA data stored</span></div>';
+            } else {
+                pwaKeys.forEach(key => {
+                    const value = localStorage.getItem(key);
+                    lsHTML += `
+                        <div class="info-row">
+                            <span class="label">${key}:</span>
+                            <span class="value">${value}</span>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('localStorageStatus').innerHTML = lsHTML;
+
+            // beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (e) => {
+                addLog('beforeinstallprompt event fired!', 'success');
+                e.preventDefault();
+            });
+
+            addLog('Debug page initialized');
+        }
+
+        function clearPWAData() {
+            const keys = Object.keys(localStorage).filter(k => k.startsWith('pwa-'));
+            keys.forEach(k => localStorage.removeItem(k));
+            addLog('PWA localStorage cleared', 'success');
+            displayInfo();
+        }
+
+        // Initialize
+        displayInfo();
+    </script>
+</body>
+</html>

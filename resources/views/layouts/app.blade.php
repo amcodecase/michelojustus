@@ -162,6 +162,7 @@
 
         // PWA Install Prompt
         let deferredPrompt;
+        let installBannerAdded = false;
         const installBanner = document.createElement('div');
         installBanner.className = 'pwa-install-banner';
         installBanner.innerHTML = `
@@ -188,58 +189,143 @@
         `;
 
         window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA: beforeinstallprompt event fired');
             e.preventDefault();
             deferredPrompt = e;
             
             // Check if user has dismissed the banner before
             const dismissed = localStorage.getItem('pwa-dismissed');
-            if (!dismissed) {
+            const dismissedTime = localStorage.getItem('pwa-dismissed-time');
+            
+            // Check if 24 hours have passed since dismissal
+            if (dismissedTime) {
+                const now = new Date().getTime();
+                const dismissTime = parseInt(dismissedTime);
+                if (now - dismissTime < 24 * 60 * 60 * 1000) {
+                    console.log('PWA: Banner was dismissed recently');
+                    return;
+                }
+            }
+            
+            if (!dismissed || !dismissedTime) {
+                console.log('PWA: Showing install banner');
                 document.body.appendChild(installBanner);
-                setTimeout(() => installBanner.classList.add('show'), 100);
+                installBannerAdded = true;
+                setTimeout(() => installBanner.classList.add('show'), 500);
             }
         });
 
         document.addEventListener('click', (e) => {
-            if (e.target.id === 'installBtn') {
+            if (e.target.id === 'installBtn' || e.target.closest('#installBtn')) {
+                console.log('PWA: Install button clicked');
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     deferredPrompt.userChoice.then((choiceResult) => {
+                        console.log('PWA: User choice:', choiceResult.outcome);
                         if (choiceResult.outcome === 'accepted') {
                             console.log('User accepted the install prompt');
-                            installBanner.remove();
+                            if (installBannerAdded) {
+                                installBanner.remove();
+                                installBannerAdded = false;
+                            }
                         }
                         deferredPrompt = null;
                     });
+                } else {
+                    console.log('PWA: No deferred prompt available');
                 }
             }
             
-            if (e.target.id === 'closeBtn') {
+            if (e.target.id === 'closeBtn' || e.target.closest('#closeBtn')) {
+                console.log('PWA: Close button clicked');
                 installBanner.classList.remove('show');
-                setTimeout(() => installBanner.remove(), 300);
-                // Show again after 24 hours
-                const tomorrow = new Date();
-                tomorrow.setHours(tomorrow.getHours() + 24);
-                localStorage.setItem('pwa-dismissed', tomorrow.getTime());
+                setTimeout(() => {
+                    if (installBannerAdded) {
+                        installBanner.remove();
+                        installBannerAdded = false;
+                    }
+                }, 300);
+                // Store dismissal time
+                localStorage.setItem('pwa-dismissed', 'true');
+                localStorage.setItem('pwa-dismissed-time', new Date().getTime().toString());
             }
         });
-
-        // Check if dismissed time has passed
-        const dismissedTime = localStorage.getItem('pwa-dismissed');
-        if (dismissedTime && new Date().getTime() > parseInt(dismissedTime)) {
-            localStorage.removeItem('pwa-dismissed');
-        }
 
         // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
                     .then((registration) => {
-                        console.log('ServiceWorker registered:', registration);
+                        console.log('PWA: ServiceWorker registered successfully', registration);
                     })
                     .catch((error) => {
-                        console.log('ServiceWorker registration failed:', error);
+                        console.error('PWA: ServiceWorker registration failed:', error);
                     });
             });
+        } else {
+            console.log('PWA: ServiceWorker not supported in this browser');
+        }
+
+        // Debug info for PWA
+        console.log('PWA: Browser info:', {
+            userAgent: navigator.userAgent,
+            standalone: window.matchMedia('(display-mode: standalone)').matches,
+            serviceWorkerSupported: 'serviceWorker' in navigator
+        });
+
+        // Detect iOS and show alternative instructions
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            console.log('PWA: iOS detected - beforeinstallprompt not supported');
+            // iOS users need manual instructions
+            setTimeout(() => {
+                // Only show if not already installed
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    const iosPrompt = document.createElement('div');
+                    iosPrompt.className = 'pwa-install-banner';
+                    iosPrompt.innerHTML = `
+                        <div class="pwa-banner-wrapper">
+                            <div class="pwa-banner-content">
+                                <div class="pwa-banner-icon">
+                                    <i class="fa-brands fa-safari"></i>
+                                </div>
+                                <div class="pwa-banner-text">
+                                    <h4>Install App</h4>
+                                    <p>Tap <i class="fa-solid fa-share"></i> then "Add to Home Screen"</p>
+                                </div>
+                                <div class="pwa-banner-actions">
+                                    <button class="pwa-close-btn" id="iosCloseBtn">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    const dismissed = localStorage.getItem('pwa-ios-dismissed');
+                    const dismissedTime = localStorage.getItem('pwa-ios-dismissed-time');
+                    
+                    if (dismissedTime) {
+                        const now = new Date().getTime();
+                        const dismissTime = parseInt(dismissedTime);
+                        if (now - dismissTime < 24 * 60 * 60 * 1000) {
+                            return;
+                        }
+                    }
+                    
+                    if (!dismissed || !dismissedTime) {
+                        document.body.appendChild(iosPrompt);
+                        setTimeout(() => iosPrompt.classList.add('show'), 1000);
+                        
+                        document.getElementById('iosCloseBtn')?.addEventListener('click', () => {
+                            iosPrompt.classList.remove('show');
+                            setTimeout(() => iosPrompt.remove(), 300);
+                            localStorage.setItem('pwa-ios-dismissed', 'true');
+                            localStorage.setItem('pwa-ios-dismissed-time', new Date().getTime().toString());
+                        });
+                    }
+                }
+            }, 3000);
         }
 
         // Navbar scroll effect
