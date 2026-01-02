@@ -6,5 +6,6 @@
     @include('components.services', ['data' => $data])
     @include('components.projects', ['data' => $data])
     @include('components.experience', ['data' => $data])
+    @include('components.testimonials')
     @include('components.contact', ['data' => $data])
 @endsection
