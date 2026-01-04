@@ -1,25 +1,26 @@
 <section class="hero">
     <div class="container">
         <div class="hero-content">
+            <!-- Typography-First Content Block -->
             <div class="hero-text gsap-slide-left">
+                <div class="hero-label">
+                    <span><i class="fa-solid fa-location-dot"></i> {{ $data['location'] }}</span>
+                    <span class="separator">•</span>
+                    <span><i class="fa-solid fa-user"></i> {{ $data['alias'] }}</span>
+                </div>
+                
                 <h1 x-text="mode === 'business' ? '{{ $data['business']['hero']['title'] }}' : '{{ $data['technical']['hero']['title'] }}'"></h1>
                 
                 <p class="tagline">"{{ $data['tagline'] }}"</p>
                 
-                <p 
-                    class="mb-3"
-                    x-text="mode === 'business' ? '{{ $data['business']['hero']['subtitle'] }}' : '{{ $data['technical']['hero']['subtitle'] }}'"
-                ></p>
-                
-                <p 
-                    class="mb-3"
-                    x-text="mode === 'business' ? '{{ $data['business']['hero']['description'] }}' : '{{ $data['technical']['hero']['description'] }}'"
-                ></p>
-                
-                <div class="hero-meta">
-                    <span><i class="fa-solid fa-location-dot"></i> {{ $data['location'] }}</span>
-                    <span>•</span>
-                    <span><i class="fa-solid fa-user"></i> {{ $data['alias'] }}</span>
+                <div class="hero-description">
+                    <p 
+                        x-text="mode === 'business' ? '{{ $data['business']['hero']['subtitle'] }}' : '{{ $data['technical']['hero']['subtitle'] }}'"
+                    ></p>
+                    
+                    <p 
+                        x-text="mode === 'business' ? '{{ $data['business']['hero']['description'] }}' : '{{ $data['technical']['hero']['description'] }}'"
+                    ></p>
                 </div>
                 
                 <div class="hero-cta">
@@ -36,63 +37,35 @@
                 </div>
             </div>
             
-            <div class="profile-image-wrapper gsap-scale">
-                <div class="profile-gallery">
-                    <div class="profile-image">
-                        <img src="/images/gallery/img2.jpg" alt="{{ $data['name'] }}" 
-                             data-title="What you do in the dark..." 
-                             onclick="openImageModal('/images/gallery/img2.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img1.jpg" alt="{{ $data['name'] }}" 
-                             data-title="...will always come to light" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img1.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img3.jpg" alt="{{ $data['name'] }}" 
-                             data-title="Me as a System Developer" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img3.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img4.jpg" alt="{{ $data['name'] }}" 
-                             data-title="ZUFIAW 2025" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img4.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img5.jpg" alt="{{ $data['name'] }}" 
-                             data-title="ZAQA" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img5.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img6.jpg" alt="{{ $data['name'] }}" 
-                             data-title="2023 Cyber Security Workshop" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img6.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img7.jpg" alt="{{ $data['name'] }}" 
-                             data-title="2022 Infratel Educational Tour" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img7.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img8.jpg" alt="{{ $data['name'] }}" 
-                             data-title="2022 Web Development Serminar" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img8.jpg', this.dataset.title)">
-                    </div>
-                    <div class="gallery-image">
-                        <img src="/images/gallery/img9.jpg" alt="{{ $data['name'] }}" 
-                             data-title="2023 ICTAZ AGM" 
-                             loading="lazy"
-                             onclick="openImageModal('/images/gallery/img9.jpg', this.dataset.title)">
-                    </div>
+            <!-- Asymmetric Visual Panel -->
+            <div class="hero-visual gsap-scale">
+                <!-- Primary Portrait: Dominant, Partially Cropped -->
+                <div class="primary-portrait">
+                    <img 
+                        src="/images/gallery/img2.jpg" 
+                        srcset="/images/gallery/img2.jpg 600w"
+                        sizes="(max-width: 480px) 260px, (max-width: 968px) 340px, 420px"
+                        alt="{{ $data['name'] }} - Software Engineer & ICT Educator"
+                        width="600"
+                        height="800"
+                        decoding="async"
+                        fetchpriority="high"
+                        onclick="openImageModal('/images/gallery/img2.jpg', 'Primary Portrait')">
                 </div>
-                <div class="profile-glow"></div>
+                
+                <!-- Evidence Strip: Vertical Context Bar -->
+                <div class="evidence-strip">
+                    <img 
+                        src="/images/gallery/img3.jpg" 
+                        srcset="/images/gallery/img3.jpg 200w"
+                        sizes="(max-width: 480px) 60px, 80px"
+                        alt="Professional context - System Developer"
+                        width="200"
+                        height="800"
+                        loading="lazy"
+                        decoding="async"
+                        onclick="openImageModal('/images/gallery/img3.jpg', 'System Developer')">
+                </div>
             </div>
         </div>
     </div>
