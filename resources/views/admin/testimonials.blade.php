@@ -55,8 +55,33 @@
             opacity: 0.5;
             pointer-events: none;
         }
+        .admin-header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex: 1;
+        }
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
         .admin-header h1 {
-            text-align: center;
             color: white;
             font-size: 1.25rem;
             font-weight: 600;
@@ -69,7 +94,7 @@
             z-index: 1;
         }
         .admin-header h1::before {
-            content: '\f3ed';
+            content: '\f005';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             font-size: 1.5rem;
@@ -273,7 +298,13 @@
 </head>
 <body>
     <div class="admin-header">
-        <h1>Testimonials Management</h1>
+        <div class="admin-header-content">
+            <a href="/admin/dashboard" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Dashboard
+            </a>
+            <h1>Testimonials Management</h1>
+        </div>
         <form method="POST" action="/admin/logout" style="margin: 0;">
             @csrf
             <button type="submit" class="logout-btn">

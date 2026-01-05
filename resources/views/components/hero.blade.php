@@ -7,6 +7,8 @@
                     <span><i class="fa-solid fa-location-dot"></i> {{ $data['location'] }}</span>
                     <span class="separator">•</span>
                     <span><i class="fa-solid fa-user"></i> {{ $data['alias'] }}</span>
+                    <span class="separator">•</span>
+                    <span class="code-demigod"><i class="fa-solid fa-code"></i> Code Demigod</span>
                 </div>
                 
                 <h1 x-text="mode === 'business' ? '{{ $data['business']['hero']['title'] }}' : '{{ $data['technical']['hero']['title'] }}'"></h1>

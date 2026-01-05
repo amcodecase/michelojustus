@@ -26,7 +26,19 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Michelo M Justus</div>
+            <a href="/" class="logo">Michelo M Justus</a>
+            
+            <div class="nav-links">
+                <a href="/portfolio" class="nav-link">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Portfolio Showcase</span>
+                </a>
+                <a href="#" class="nav-link disabled" title="Coming Soon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Coming</span>
+                </a>
+            </div>
+            
             <div class="mode-toggle">
                 <button 
                     @click="mode = 'business'" 
