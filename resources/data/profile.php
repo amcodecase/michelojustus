@@ -202,7 +202,7 @@ return [
                 ],
                 [
                     'metric' => 'President',
-                    'label' => 'Chalimbana University ICTAZ Chapter',
+                    'label' => 'Chalimbana University ICTAZ Student Chapter',
                     'description' => 'Biggest chapter countrywide',
                 ],
                 [
@@ -321,7 +321,7 @@ return [
                 ],
                 [
                     'metric' => 'President',
-                    'label' => 'Chalimbana University ICTAZ Chapter',
+                    'label' => 'Chalimbana University ICTAZ Student Chapter',
                     'description' => 'Biggest chapter countrywide',
                 ],
                 [

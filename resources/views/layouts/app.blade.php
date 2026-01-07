@@ -19,6 +19,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <style>
         [x-cloak] { display: none !important; }
     </style>
@@ -118,15 +119,15 @@
     <script>
         // Image Modal Functions
         const galleryImages = [
-            { src: '/images/gallery/img2.jpg', title: 'What you do in the dark...' },
-            { src: '/images/gallery/img1.jpg', title: '...will always come to light' },
-            { src: '/images/gallery/img3.jpg', title: '2025 Devcon: AI Edition' },
-            { src: '/images/gallery/img4.jpg', title: '2025 ZUFIAW' },
-            { src: '/images/gallery/img5.jpg', title: '2024 ZAQA' },
-            { src: '/images/gallery/img6.jpg', title: '2023 Cyber Security Workshop' },
-            { src: '/images/gallery/img7.jpg', title: '2022 Infratel Educational Tour' },
-            { src: '/images/gallery/img8.jpg', title: '2022 Web Development Serminar' },
-            { src: '/images/gallery/img9.jpg', title: '2023 ICTAZ AGM' }
+            { src: '/images/gallery/img2.webp', title: 'What you do in the dark...' },
+            { src: '/images/gallery/img1.webp', title: '...will always come to light' },
+            { src: '/images/gallery/img3.webp', title: '2025 Devcon: AI Edition' },
+            { src: '/images/gallery/img4.webp', title: '2025 ZUFIAW' },
+            { src: '/images/gallery/img5.webp', title: '2024 ZAQA' },
+            { src: '/images/gallery/img6.webp', title: '2023 Cyber Security Workshop' },
+            { src: '/images/gallery/img7.webp', title: '2022 Infratel Educational Tour' },
+            { src: '/images/gallery/img8.webp', title: '2022 Web Development Serminar' },
+            { src: '/images/gallery/img9.webp', title: '2023 ICTAZ AGM' }
         ];
         let currentImageIndex = 0;
 
